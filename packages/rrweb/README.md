@@ -12,6 +12,7 @@ This repo is forked from [getsentry/rrweb](https://github.com/getsentry/rrweb.gi
 Push to npmjs.com with this command.
 
 ```bash
+yarn build
 npm publish --access public
 ```
 

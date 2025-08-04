@@ -244,7 +244,17 @@ export class CanvasManager implements CanvasManagerInterface {
   }
 
   private initFPSWorker(): Worker {
-    const worker = new Worker(getImageBitmapDataUrlWorkerURL());
+    /// --- Start EasyCode AI ---
+    let trustedWorkerUrl;
+    const win = window as any;
+    if (win.trustedTypes && win.trustedTypes.createPolicy) {
+      const policy = win.trustedTypes.createPolicy('sentry-canvas-worker', {
+        createScriptURL: (url: string) => url
+      });
+      trustedWorkerUrl = policy.createScriptURL(getImageBitmapDataUrlWorkerURL());
+    }
+    const worker = new Worker(trustedWorkerUrl || getImageBitmapDataUrlWorkerURL());
+    /// --- End EasyCode AI ---
     worker.onmessage = (e) => {
       const data = e.data as ImageBitmapDataURLWorkerResponse;
       const { id } = data;

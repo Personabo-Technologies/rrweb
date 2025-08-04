@@ -1,6 +1,6 @@
 {
   "name": "@easycode-ai/rrweb",
-  "version": "2.36.0",
+  "version": "2.36.1",
   "description": "record and replay the web",
   "scripts": {
     "retest": "vitest run --exclude test/benchmark",
