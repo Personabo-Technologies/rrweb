@@ -7,6 +7,14 @@ export function isInCrossOriginIFrame(): boolean {
     try {
       void window.parent.location.origin;
     } catch (error) {
+      // Custom cross-origin detection for EasyCodeAI IDE
+      // Check if this is a vscode-webview iframe that should be treated as same-origin
+      const isVscodeWebview = window.location.protocol === 'vscode-webview:' && 
+                             window.parent.location.protocol === 'vscode-file:';
+      
+      if (isVscodeWebview) {
+        return false; // Treat vscode-webview as same-origin
+      }
       return true;
     }
   }

@@ -89,6 +89,8 @@ export type recordOptions<T> = {
   getCanvasManager?: (
     options: CanvasManagerConstructorOptions,
   ) => CanvasManagerInterface;
+  // Custom cross-origin detection function for special cases like EasyCodeAI IDE
+  isCrossOriginIframe?: () => boolean;
 };
 
 export type observerParam = {

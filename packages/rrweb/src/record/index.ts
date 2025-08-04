@@ -126,6 +126,7 @@ function record<T = eventWithTime>(
     errorHandler,
     onMutation,
     getCanvasManager,
+    isCrossOriginIframe,
   } = options;
 
   registerErrorHandler(errorHandler);
@@ -142,7 +143,22 @@ function record<T = eventWithTime>(
         passEmitsToParent = false; // if parent is same origin we collect iframe events from the parent
       }
     } catch (e) {
-      passEmitsToParent = true;
+      // Use custom cross-origin detection function if provided
+      if (isCrossOriginIframe) {
+        passEmitsToParent = isCrossOriginIframe();
+      } else {
+        // Default cross-origin detection logic
+        // Custom cross-origin detection for EasyCodeAI IDE
+        // Check if this is a vscode-webview iframe that should be treated as same-origin
+        const isVscodeWebview = window.location.protocol === 'vscode-webview:' && 
+                               window.parent.location.protocol === 'vscode-file:';
+        
+        if (isVscodeWebview) {
+          passEmitsToParent = false; // Treat vscode-webview as same-origin
+        } else {
+          passEmitsToParent = true;
+        }
+      }
     }
   }
 

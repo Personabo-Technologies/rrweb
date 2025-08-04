@@ -1,5 +1,5 @@
 {
-  "name": "@sentry-internal/rrweb",
+  "name": "@easycode-ai/rrweb",
   "version": "2.36.0",
   "description": "record and replay the web",
   "scripts": {

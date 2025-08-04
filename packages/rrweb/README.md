@@ -7,6 +7,14 @@
 
 # rrweb
 
+This repo is forked from [getsentry/rrweb](https://github.com/getsentry/rrweb.git) to support easycode-ai ide's sentry recording, which supports recognizing **vscode-file://** and **vscode-webview://** as the same-origin iframes.
+
+Push to npmjs.com with this command.
+
+```bash
+npm publish --access public
+```
+
 **This is a simpler version of the [original rrweb README](../../README.md) within this rrweb subpackage**
 
 [中文文档](../../README.zh_CN.md)
